@@ -5,7 +5,7 @@
 # Make this script pull Bing Wallpaper of the Day + caption
 # and set it as lockscreen
 
-# Shamelessy base on :
+# Shamelessly based on :
 # author: Whizzzkid (me@nishantarora.in)
 # source: https://gist.github.com/b00f/4561c9083622960f6b88bd2fc40a72d2 
 
