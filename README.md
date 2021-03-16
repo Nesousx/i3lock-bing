@@ -1,5 +1,3 @@
-# !!! Forked from https://gitlab.com/JMarceloFN/i3lock-bing !!!
-
 # i3lock-bing
 # Denis G. March 16 2021
 # WIP
