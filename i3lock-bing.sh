@@ -30,7 +30,7 @@ market="&mkt=en-US"
 const="&n=1"
 
 # Image extension.
-extn=".png"
+extn=".jpg"
 
 # Size.
 size="1920x1080"
@@ -58,17 +58,17 @@ done
 
 # Required Image Uri.
 reqImg=$bing$api$format$day$market$const
-
+#echo "$reqImg"
 
 # Logging.
-echo "Pinging Bing API..."
+#echo "Pinging Bing API..."
 
 # Fetching API response.
-apiResp=$(curl -s $reqImg)
-if [ $? -gt 0 ]; then
-  echo "Ping failed!"
-  exit 1
-fi
+#apiResp=$(curl -s $reqImg)
+#if [ $? -gt 0 ]; then
+#  echo "Ping failed!"
+#  exit 1
+#fi
 
 # Default image URL in case the required is not available.
 defImgURL=$bing$(echo $apiResp | grep -oP "url\":\"[^\"]*" | cut -d "\"" -f 3)
