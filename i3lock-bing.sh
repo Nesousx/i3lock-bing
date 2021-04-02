@@ -7,8 +7,8 @@
 # WIP
 # TODO :
 # * Single call to API ;
-# * Do no call API / script it image already exists.
 #
+# Source for failsafe wallpaper : https://wallhaven.cc/w/13w91g
 
 ### Variables
 today="`date +%d%m%y`"
@@ -20,10 +20,17 @@ daily_suffix="`curl -s $api_url | jq -r '.images[]|.url'`"
 copyright="`curl -s $api_url | jq -r '.images[]|.copyright'`"
 
 lockscreen="/tmp/bing_$today.png"
+bkp_lockscreen="$PWD/bkp_lockscreen.png"
 
-## Download image
+## Download image only if not already there otherwise set failsafe lockscreen
 if [ ! -f "$lockscreen" ]; then
 	curl -so /tmp/bing_$today.jpg $base_url$daily_suffix
+elif [ -f "$lockscreen" ]; then
+	i3lock -i $lockscreen
+	exit 0
+else
+	i3lock -i $bkp_lockscreen
+	exit 0
 fi
 
 ## Convert and add caption
