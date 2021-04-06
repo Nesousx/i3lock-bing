@@ -15,34 +15,35 @@ today="`date +%d%m%y`"
 
 base_url=http://bing.com
 api_url=https://www.bing.com/HPImageArchive.aspx\?\&format\=js\&idx\=0\&mkt\=en-US\&n\=1
-
-## Get API file locally to limit number of requests
 api_file="/tmp/bing_api_$today.json"
-curl -so $api_file $api_url
+
+bkp_lockscreen="$PWD/bkp_lockscreen.png"
+
+## Get API file locally to limit number of requests, if it fails, go to failsfe
+if [ ! -f "$api_file" ]; then
+	 curl -fso $api_file $api_url && : || i3lock -i $bkp_lockscreen && exit 0
+else
+	:
+fi
 
 daily_suffix="`cat $api_file | jq -r '.images[]|.url'`"
 copyright="`cat -s $api_file | jq -r '.images[]|.copyright'`"
 
 lockscreen="/tmp/bing_$today.png"
-bkp_lockscreen="$PWD/bkp_lockscreen.png"
 
-## Download image only if not already there otherwise set failsafe lockscreen
+## Download image only if not already there otherwise
 if [ ! -f "$lockscreen" ]; then
 	curl -so /tmp/bing_$today.jpg $base_url$daily_suffix
-elif [ -f "$lockscreen" ]; then
+else
 	i3lock -i $lockscreen
 	#echo "lockscreen from cache"
-	exit 0
-else
-	i3lock -i $bkp_lockscreen
-	#echo "bkp lockscreen"
 	exit 0
 fi
 
 ## Convert and add caption
 convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite $lockscreen
 
-## Set lockscreen
+## Set new lockscreen
 i3lock -i $lockscreen
 #echo "new lockscreen"
 
