@@ -45,7 +45,6 @@ fi
 
 ## Convert and add caption
 convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite -scale $resolution $lockscreen
-#convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite $lockscreen
 
 ## Set new lockscreen
 i3lock -i $lockscreen
