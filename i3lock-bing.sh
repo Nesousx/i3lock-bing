@@ -6,7 +6,6 @@
 # March 19, 2021
 # WIP
 # TODO :
-# * Debug why on first run, wallpaper is NOT set ;
 # * Test, test, test !
 #
 # Source for failsafe wallpaper : https://wallhaven.cc/w/13w91g
@@ -24,7 +23,7 @@ bkp_lockscreen="$PWD/bkp_lockscreen.png"
 
 ## Get API file locally to limit number of requests, if it fails, go to failsfe
 if [ ! -f "$api_file" ]; then
-	 curl -fso $api_file $api_url && : || i3lock -i $bkp_lockscreen && exit 0
+	 curl -fso $api_file $api_url && :
 else
 	:
 fi
