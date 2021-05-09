@@ -6,7 +6,7 @@
 # March 19, 2021
 # WIP
 # TODO :
-# * Scale to desktop resolution ;
+# * Debug why on first run, wallpaper is NOT set ;
 # * Test, test, test !
 #
 # Source for failsafe wallpaper : https://wallhaven.cc/w/13w91g
