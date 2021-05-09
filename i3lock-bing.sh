@@ -6,12 +6,15 @@
 # March 19, 2021
 # WIP
 # TODO :
+# * Scale to desktop resolution ;
 # * Test, test, test !
 #
 # Source for failsafe wallpaper : https://wallhaven.cc/w/13w91g
 
 ### Variables
 today="`date +%d%m%y`"
+
+resolution="`xdpyinfo | awk '/dimensions/{print $2}'`"
 
 base_url=http://bing.com
 api_url=https://www.bing.com/HPImageArchive.aspx\?\&format\=js\&idx\=0\&mkt\=en-US\&n\=1
@@ -41,7 +44,8 @@ else
 fi
 
 ## Convert and add caption
-convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite $lockscreen
+convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite -scale $resolution $lockscreen
+#convert /tmp/bing_$today.jpg -size 600x -background snow2 -fill gray44 -pointsize 24 caption:"$copyright" -gravity SouthEast -composite $lockscreen
 
 ## Set new lockscreen
 i3lock -i $lockscreen
