@@ -37,7 +37,7 @@ lockscreen="/tmp/bing_$today.png"
 if [ ! -f "$lockscreen" ]; then
 	curl -so /tmp/bing_$today.jpg $base_url$daily_suffix
 else
-	i3lock -i $lockscreen
+	notify-send "DUNST_COMMAND_PAUSE"; i3lock -i $lockscreen -n; notify-send "DUNST_COMMAND_RESUME"
 	#echo "lockscreen from cache"
 	exit 0
 fi
